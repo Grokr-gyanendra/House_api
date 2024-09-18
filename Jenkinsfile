@@ -16,18 +16,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script {
-                    def workspaceUnixPath = pwd().replaceAll('C:', '/c').replaceAll('\\\\', '/')
-                    bat "docker run -v ${workspaceUnixPath}:${workspaceUnixPath} -w ${workspaceUnixPath} house python index.py"
-                }
-            }
-        }
-        stage('Session Timeout') {
-            steps {
-                timeout(time: 10, unit: 'SECONDS') {
+                timeout(time: 1, unit: 'MINUTES') {   
                     script {
-                        echo "Session created. Timing out after 10 seconds..."
-                        sleep(time: 10, unit: 'SECONDS')
+                        def workspaceUnixPath = pwd().replaceAll('C:', '/c').replaceAll('\\\\', '/')
+                        bat "docker run -v ${workspaceUnixPath}:${workspaceUnixPath} -w ${workspaceUnixPath} house python index.py"
                     }
                 }
             }
