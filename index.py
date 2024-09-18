@@ -29,4 +29,4 @@ def specific_property(suburb=None, min_price=None, max_price=None):
     return filterd_df.values.tolist()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
