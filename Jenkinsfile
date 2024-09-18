@@ -22,5 +22,15 @@ pipeline {
                 }
             }
         }
+        stage('Session Timeout') {
+            steps {
+                timeout(time: 10, unit: 'SECONDS') {
+                    script {
+                        echo "Session created. Timing out after 10 seconds..."
+                        sleep(time: 10, unit: 'SECONDS')
+                    }
+                }
+            }
+        }
     }
 }
